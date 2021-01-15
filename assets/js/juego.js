@@ -24,8 +24,11 @@ const crearDeck = () => {
       deck.push( esp + tipo);
     }
   }
+  // muestro el deck
   console.log(deck);
+  // barajeo el deck
   deck = _.shuffle( deck )
+
   console.log(deck)
 }
 crearDeck();
@@ -39,8 +42,8 @@ const pedirCarta = () => {
 
   // cuando se pide carta debo sacarlo del deck
   const carta = deck.pop()
-  console.log(deck)
-  console.log(carta)
+  // console.log(deck)
+  // console.log(carta)
   return carta
 }
 
@@ -51,4 +54,35 @@ const pedirCarta = () => {
 
 // simulo el deck vacio
 // deck = []
-pedirCarta()
+
+// pedirCarta()
+
+const valorCarta = ( carta ) => {
+  // const valor = carta[0]; //no es la forma adecuada de extraer el numero, probar con 10D para eso usamos substring
+  // console.log(valor);
+  const valor = carta.substring(0, carta.length - 1);
+  // let puntos = 0;
+  // if (isNaN(valor)) {
+  //   console.log('No es un número');
+  //   // La J, K , Q valen 10 puntos excepto la A que vale 11
+  //   puntos = ( valor === 'A' ) ? 11 : 10;
+  // } else {
+  //   console.log('Es un número');
+  //   // para transformar a numero
+  //   puntos = valor * 1;
+  // }
+  // console.log(puntos);
+
+  // simplificacion del codigo anterior
+  return ( isNaN( valor ) ) ?
+            ( valor === 'A' ) ? 11 : 10
+            : valor * 1;
+}
+// valorCarta('2D')
+// valorCarta('10D')
+// valorCarta('KD')
+debugger
+// muestro el valor de la carta sacado del deck
+
+console.log(valorCarta(pedirCarta()));
+console.log(valorCarta(pedirCarta()));
