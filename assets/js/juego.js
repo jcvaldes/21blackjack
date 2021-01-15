@@ -11,6 +11,13 @@ let deck = [];
 const tipos = ['C', 'D', 'H', 'S'];
 const especiales = ['A', 'J', 'Q', 'K'];
 
+let puntosJugador = 0,
+    puntosComputadora = 0;
+
+const puntosHTML = document.querySelectorAll('small');
+const btnPedir = document.querySelector('#btnPedir')
+const btnNuevo = document.querySelector('#btnNuevo')
+const btnDetener = document.querySelector('#btnDetener')
 // esta funcion permite crear un deck
 const crearDeck = () => {
   for (let i = 2; i <= 10; i++) {
@@ -84,5 +91,12 @@ const valorCarta = ( carta ) => {
 debugger
 // muestro el valor de la carta sacado del deck
 
-console.log(valorCarta(pedirCarta()));
-console.log(valorCarta(pedirCarta()));
+// console.log(valorCarta(pedirCarta()));
+// console.log(valorCarta(pedirCarta()));
+
+btnPedir.addEventListener('click', () => {
+  const carta = pedirCarta()
+  puntosJugador = puntosJugador + valorCarta(carta) 
+  console.log(puntosJugador)
+  puntosHTML[0].innerText = puntosJugador
+})
