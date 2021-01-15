@@ -121,6 +121,7 @@ btnPedir.addEventListener('click', () => {
     btnDetener.disabled = true;
     turnoComputadora(puntosJugador)
   }
+
 })
 btnDetener.addEventListener('click', () => { 
   btnPedir.disabled = true;
@@ -147,6 +148,18 @@ const turnoComputadora = ( puntosMinimos ) => {
       break
     }
   } while( (puntosComputadora < puntosMinimos) && (puntosComputadora <= 21) )
+  // JS no es multihilo y si no hago esto aparece el mensaje antes de aparecer las cartas
+  setTimeout(() => {
+    if (puntosComputadora === puntosMinimos) {
+      alert('Nadie gana :(')
+    } else if(puntosMinimos > 21 ) {
+      alert('La casa gana')
+    } else if(puntosComputadora > 21 ) {
+      alert('Felicidades Ganaste :)')
+    } else {
+      alert('La casa gana')
+    }
+  }, 100) 
 } 
 
 // console.log(25)
