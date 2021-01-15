@@ -18,6 +18,7 @@ const puntosHTML = document.querySelectorAll('small');
 const btnPedir = document.querySelector('#btnPedir')
 const btnNuevo = document.querySelector('#btnNuevo')
 const btnDetener = document.querySelector('#btnDetener')
+const divCartasJugador = document.querySelector('#jugador-cartas')
 // esta funcion permite crear un deck
 const crearDeck = () => {
   for (let i = 2; i <= 10; i++) {
@@ -99,4 +100,19 @@ btnPedir.addEventListener('click', () => {
   puntosJugador = puntosJugador + valorCarta(carta) 
   console.log(puntosJugador)
   puntosHTML[0].innerText = puntosJugador
+
+  // Esto es lo que quiero crear dinamicamente
+  //  <img class="carta" src="assets/img/2C.png" alt="carta">
+  const imgCarta = document.createElement('img')
+  imgCarta.src = `assets/img/${carta}.png`
+  imgCarta.classList.add('carta')
+  divCartasJugador.append(imgCarta)
+  
+  // Evaluo los puntos
+  if (puntosJugador > 21) {
+    console.warn('Lo siento mucho, perdiste')
+    btnPedir.disabled = true
+  } else if ( puntosJugador === 21) {
+    console.warn('genial!!, ganaste')
+  }
 })
