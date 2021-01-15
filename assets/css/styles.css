@@ -2,6 +2,7 @@ html, body {
   background-color: #2F4F30;
   margin: 0px;
   color: white;
+  overflow: hidden;
 }
 
 .titulo {
