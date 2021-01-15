@@ -19,6 +19,7 @@ const btnPedir = document.querySelector('#btnPedir')
 const btnNuevo = document.querySelector('#btnNuevo')
 const btnDetener = document.querySelector('#btnDetener')
 const divCartasJugador = document.querySelector('#jugador-cartas')
+const divCartasComputadora = document.querySelector('#computadora-cartas')
 // esta funcion permite crear un deck
 const crearDeck = () => {
   for (let i = 2; i <= 10; i++) {
@@ -89,7 +90,7 @@ const valorCarta = ( carta ) => {
 // valorCarta('2D')
 // valorCarta('10D')
 // valorCarta('KD')
-debugger
+
 // muestro el valor de la carta sacado del deck
 
 // console.log(valorCarta(pedirCarta()));
@@ -98,7 +99,7 @@ debugger
 btnPedir.addEventListener('click', () => {
   const carta = pedirCarta()
   puntosJugador = puntosJugador + valorCarta(carta) 
-  console.log(puntosJugador)
+  // console.log(puntosJugador)
   puntosHTML[0].innerText = puntosJugador
 
   // Esto es lo que quiero crear dinamicamente
@@ -112,7 +113,41 @@ btnPedir.addEventListener('click', () => {
   if (puntosJugador > 21) {
     console.warn('Lo siento mucho, perdiste')
     btnPedir.disabled = true
+    btnDetener.disabled = true;
+    turnoComputadora(puntosJugador)
   } else if ( puntosJugador === 21) {
     console.warn('genial!!, ganaste')
+    btnPedir.disabled = true
+    btnDetener.disabled = true;
+    turnoComputadora(puntosJugador)
   }
 })
+btnDetener.addEventListener('click', () => { 
+  btnPedir.disabled = true;
+  btnDetener.disabled = true;
+  turnoComputadora(puntosJugador)
+})
+
+const turnoComputadora = ( puntosMinimos ) => {
+  do {
+    const carta = pedirCarta()
+    puntosComputadora = puntosComputadora + valorCarta(carta) 
+    console.log(puntosComputadora)
+    puntosHTML[1].innerText = puntosComputadora
+  
+    // Esto es lo que quiero crear dinamicamente
+    //  <img class="carta" src="assets/img/2C.png" alt="carta">
+    const imgCarta = document.createElement('img')
+    imgCarta.src = `assets/img/${carta}.png`
+    imgCarta.classList.add('carta')
+    divCartasComputadora.append(imgCarta)
+    // si los puntos minimos que saco el jugador si supera los 21 
+    // con cualquier carta que saque la computadora ya gana
+    if ( puntosMinimos > 21) {
+      break
+    }
+  } while( (puntosComputadora < puntosMinimos) && (puntosComputadora <= 21) )
+} 
+
+// console.log(25)
+// turnoComputadora(25)  
